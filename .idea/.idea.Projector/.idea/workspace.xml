@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="88b17c0d-ab91-4874-b3a6-22e611bd3501" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/EC2FDDD6-D7D0-4892-B850-D96043C68FCB.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Projector/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Projector/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1642425464236</updated>
       <workItem from="1642425472703" duration="4765000" />
+      <workItem from="1642490941460" duration="631000" />
     </task>
     <servers />
   </component>
