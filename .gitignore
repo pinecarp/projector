@@ -15,6 +15,9 @@
 # .idea Folder
 .idea/
 
+# TextMesh Pro files
+Assets/TextMesh Pro/
+
 # Generated files
 .idea/**/contentModel.xml
 
