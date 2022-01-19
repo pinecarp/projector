@@ -7,30 +7,36 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    
     private float playerSpeed = 3;
     private float itemLerpSpeed = 7;
     private float radius = 1;
 
-    private bool isTake;
+    public bool isTake;
+    private bool isInInventory;
     
-    public Transform point;
+    //public Transform point;
     
-    public GameObject pickupCanvas;
-    public GameObject item;
+    //public GameObject item;
+    //public GameObject pickupItemCanvas;
+    //public GameObject inventoryCanvas;
+    
+    private Collider2D[] itemColliders;
     
     public Camera mainCamera;
     
-    public LayerMask itemsLayer;
+    //public LayerMask itemsLayer;
+    //private Vector3 mousePos;
     
-    private Vector3 mousePos;
-
-     
+    
      private void Update()
      {
-         mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+         //mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+         //itemColliders =  Physics2D.OverlapCircleAll(point.transform.position, radius, itemsLayer);
          
          Movement();
-         Items();
+         BackpackPickUp();
+         
 
      }
 
@@ -42,28 +48,21 @@ public class Controller : MonoBehaviour
           transform.position += Vector3.right * horizontalinput * playerSpeed * Time.deltaTime;
           transform.position += Vector3.up * verticalinput * playerSpeed * Time.deltaTime;
      }
-     private void Items()
-     {
-         Collider2D[] itemColliders =  Physics2D.OverlapCircleAll(point.transform.position, radius, itemsLayer);
+     
 
-         if (itemColliders.Length >= 1 & isTake == false)
+     private void BackpackPickUp()
+     {/*
+         if (itemColliders.Length >= 1)
          {
-             pickupCanvas.SetActive(true);
+             foreach (var item in itemColliders)
+             {
+                 if (item.tag == "backpack")
+                 {
+                     inventoryCanvas.SetActive(true);
+                 }
+             }
          }
-         else
-         {
-             pickupCanvas.SetActive(false);
-         }
-
-         if (Input.GetKeyDown(KeyCode.E) & itemColliders.Length >= 1)
-         {
-             isTake = true;
-         }
-
-         if (isTake == true)
-         {
-             item.transform.position = Vector3.Lerp(item.transform.position, new Vector3(mousePos.x,mousePos.y,5), itemLerpSpeed * Time.deltaTime);
-         }
+         */
      }
 
 }
