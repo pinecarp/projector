@@ -1,18 +1,18 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Backpack : MonoBehaviour
 {
+    public GameObject inventoryCanvas;
     
     private float itemLerpSpeed = 7;
     private float radius = 1;
 
 
     private bool isInInventory = false;
-    public bool nearPlayer = false;
+    private bool isPickedUp;
+
     
     public Transform point;
     
@@ -27,6 +27,7 @@ public class Item : MonoBehaviour
     public LayerMask PLayerMask;
     
     private Vector3 mousePos;
+    public Transform backpackpoint;
 
     Controller controller;
     
@@ -41,36 +42,37 @@ public class Item : MonoBehaviour
     {
 
         mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        itemColliders =  Physics2D.OverlapCircleAll(point.transform.position, radius, PLayerMask);
+        itemColliders =  Physics2D.OverlapCircleAll(transform.position, radius, PLayerMask);
 
         PickUp();
+
+        if (isPickedUp)
+        {
+            transform.position = Vector3.Lerp(transform.position, backpackpoint.transform.position, 3 * Time.deltaTime);
+        }
+        
+
 
     }
     
      
     private void PickUp()
     {
-        if (itemColliders.Length >= 1 & controller.isTake == false)
+        if (itemColliders.Length >= 1 & inventoryCanvas.activeSelf == false)
         {
             foreach (var item in itemColliders)
             {
                 if (item.tag == "Player")
                 {
-                    
                     pickupItemCanvas.SetActive(true);
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        nearPlayer = true;
-                        controller.isTake = true;
-                        
-                        gameObject.tag = "InHand";
-                        gameObject.layer = 7;
+                        inventoryCanvas.SetActive(true);
+                        transform.parent = inventoryCanvas.transform;
+                        isPickedUp = true;
                     }
                 }
-                else
-                {
-                    nearPlayer = false;
-                }
+
             }
         }
         else
@@ -78,10 +80,6 @@ public class Item : MonoBehaviour
             pickupItemCanvas.SetActive(false);
         }
         
-        if (nearPlayer == true & gameObject.tag == "InHand")
-        {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(mousePos.x,mousePos.y,15), itemLerpSpeed * Time.deltaTime);
-        }
     }
 
 }
