@@ -26,6 +26,7 @@ public class Item : MonoBehaviour
     private Vector3 mousePos;
 
     private Variables variables;
+    private InventorySlot slot;
 
 
     private void Awake()
@@ -40,6 +41,7 @@ public class Item : MonoBehaviour
         itemColliders =  Physics2D.OverlapCircleAll(point.transform.position, radius, PLayerMask);
 
         PickUp();
+
     }
     
      
@@ -59,7 +61,6 @@ public class Item : MonoBehaviour
                         variables.inHand = true;
                         
                         gameObject.tag = "InHand";
-                        gameObject.layer = 7;
                     }
                 }
             }
@@ -74,5 +75,4 @@ public class Item : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, new Vector3(mousePos.x,mousePos.y,15), itemLerpSpeed * Time.deltaTime);
         }
     }
-
 }
