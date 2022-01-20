@@ -12,7 +12,7 @@ public class Item : MonoBehaviour
 
 
     private bool isInInventory = false;
-    private bool nearPlayer = false;
+    public bool nearPlayer = false;
     
     public Transform point;
     
@@ -44,9 +44,7 @@ public class Item : MonoBehaviour
         itemColliders =  Physics2D.OverlapCircleAll(point.transform.position, radius, PLayerMask);
 
         PickUp();
-        
-        Debug.Log(controller.isTake);
-
+        putInInventory();
     }
     
      
@@ -64,6 +62,9 @@ public class Item : MonoBehaviour
                     {
                         nearPlayer = true;
                         controller.isTake = true;
+                        
+                        gameObject.tag = "InHand";
+                        gameObject.layer = 7;
                     }
                 }
                 else
@@ -77,9 +78,17 @@ public class Item : MonoBehaviour
             pickupItemCanvas.SetActive(false);
         }
         
-        if (nearPlayer)
+        if (nearPlayer == true & gameObject.tag == "InHand")
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(mousePos.x,mousePos.y,15), itemLerpSpeed * Time.deltaTime);
+        }
+    }
+
+    void putInInventory()
+    {
+        if (Input.GetMouseButtonDown(1) & nearPlayer == true)
+        {
+            nearPlayer = false;
         }
     }
 }

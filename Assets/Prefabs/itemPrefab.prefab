@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: -2965115286108077136}
   m_Layer: 3
   m_Name: itemPrefab
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f153b31b30650475690f02cb14e7d79c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nearPlayer: 0
   point: {fileID: 501472535329281184}
   pickupItemCanvas: {fileID: 2485145158848484032}
   PLayerMask:
