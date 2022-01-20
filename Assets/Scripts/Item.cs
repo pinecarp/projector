@@ -9,67 +9,58 @@ public class Item : MonoBehaviour
     
     private float itemLerpSpeed = 7;
     private float radius = 1;
-
-
-    private bool isInInventory = false;
-    public bool nearPlayer = false;
+    
+    public bool itemCanMove = false;
     
     public Transform point;
     
     public GameObject pickupItemCanvas;
-
-
+    
     private Collider2D[] itemColliders;
     private GameObject[] onHand;
     
-    Camera mainCamera;
+    private Camera mainCamera;
     
     public LayerMask PLayerMask;
     
     private Vector3 mousePos;
 
-    Controller controller;
-    
+    private Variables variables;
+
 
     private void Awake()
     {
-        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
+        variables = GameObject.FindGameObjectWithTag("GameController").GetComponent<Variables>();
     }
 
     private void Update()
     {
-
         mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         itemColliders =  Physics2D.OverlapCircleAll(point.transform.position, radius, PLayerMask);
 
         PickUp();
-
     }
     
      
     private void PickUp()
     {
-        if (itemColliders.Length >= 1 & controller.isTake == false)
+        if (itemColliders.Length >= 1 & variables.inHand == false)
         {
             foreach (var item in itemColliders)
             {
                 if (item.tag == "Player")
                 {
-                    
                     pickupItemCanvas.SetActive(true);
+                    
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        nearPlayer = true;
-                        controller.isTake = true;
+                        itemCanMove = true;
+                        variables.inHand = true;
                         
                         gameObject.tag = "InHand";
                         gameObject.layer = 7;
                     }
-                }
-                else
-                {
-                    nearPlayer = false;
                 }
             }
         }
@@ -78,7 +69,7 @@ public class Item : MonoBehaviour
             pickupItemCanvas.SetActive(false);
         }
         
-        if (nearPlayer == true & gameObject.tag == "InHand")
+        if (itemCanMove & gameObject.tag == "InHand")
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(mousePos.x,mousePos.y,15), itemLerpSpeed * Time.deltaTime);
         }

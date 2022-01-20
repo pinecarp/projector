@@ -9,37 +9,31 @@ public class InventorySlot : MonoBehaviour
 
     private Collider2D[] inHandColliders;
 
-    private Camera mainCamera;
-
     private Item item;
-    private Controller controller;
 
+    private Variables variables;
 
+    
     private void Awake()
     {
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
-        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
-        
+        variables = GameObject.FindGameObjectWithTag("GameController").GetComponent<Variables>();
     }
 
     private void Update()
     {
-        
-        
         itemInHand = GameObject.FindGameObjectWithTag("InHand");
-        
-   
-
     }
 
     public void OnClick()
     {
         item = GameObject.FindGameObjectWithTag("InHand").GetComponent<Item>();
+
+        item.itemCanMove = false;
+        variables.inHand = false;
+        
+        itemInHand.tag = "Item";
         
         itemInHand.transform.position = transform.position;
-        item.nearPlayer = false;
-        controller.isTake = false;
-        itemInHand.tag = "Item";
         itemInHand.transform.parent = gameObject.transform;
     }
 }
