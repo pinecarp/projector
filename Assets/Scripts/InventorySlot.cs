@@ -27,7 +27,6 @@ public class InventorySlot : MonoBehaviour
 
     public void OnClick()
     {
-
         if (isFull == false)
         {
             item = GameObject.FindGameObjectWithTag("InHand").GetComponent<Item>();
@@ -47,7 +46,7 @@ public class InventorySlot : MonoBehaviour
   
             foreach (var i in itemsInInventory)
             {
-                if (i.transform.position == transform.position)
+                if (i.transform.position == transform.position & !variables.inHand)
                 {
                     i.gameObject.tag = "InHand";
                     gameObject.transform.DetachChildren();

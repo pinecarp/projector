@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -15,7 +16,8 @@ public class Item : MonoBehaviour
     public Transform point;
     
     public GameObject pickupItemCanvas;
-    
+    public GameObject itemPrefab;
+
     private Collider2D[] itemColliders;
     private GameObject[] onHand;
     
@@ -41,7 +43,6 @@ public class Item : MonoBehaviour
         itemColliders =  Physics2D.OverlapCircleAll(point.transform.position, radius, PLayerMask);
 
         PickUp();
-
     }
     
      
@@ -53,7 +54,8 @@ public class Item : MonoBehaviour
             {
                 if (item.tag == "Player")
                 {
-                    pickupItemCanvas.SetActive(true);
+                    if(!gameObject.CompareTag("InInventory") & !gameObject.CompareTag("InHand"))
+                        pickupItemCanvas.SetActive(true);
                     
                     if (Input.GetKeyDown(KeyCode.E))
                     {

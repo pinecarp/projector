@@ -384,9 +384,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f153b31b30650475690f02cb14e7d79c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearPlayer: 0
+  itemCanMove: 0
   point: {fileID: 501472535329281184}
   pickupItemCanvas: {fileID: 2485145158848484032}
+  itemPrefab: {fileID: 5525566981011417298}
   PLayerMask:
     serializedVersion: 2
     m_Bits: 64

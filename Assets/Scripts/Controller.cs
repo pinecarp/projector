@@ -8,7 +8,7 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
    
-    private float playerSpeed = 3;
+    private float playerSpeed = 5;
 
     public Camera mainCamera;
     
