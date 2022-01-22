@@ -27,6 +27,26 @@ public class Controller : MonoBehaviour
           position += Vector3.up * verticalinput * playerSpeed * Time.deltaTime;
           transform.position = position;
      }
-     
 
+     private void OnTriggerStay2D(Collider2D collider)
+     {
+         if (collider.gameObject.CompareTag("Friend"))
+         {
+             Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+             rb.isKinematic = false;
+             Vector2 difference = transform.position - collider.transform.position;
+             difference = difference.normalized / 2;
+             rb.AddForce(difference, ForceMode2D.Impulse);
+             StartCoroutine(knock(rb));
+             
+         }
+     }
+
+     private IEnumerator knock(Rigidbody2D rb)
+     {
+         yield return new WaitForSeconds(0.5f);
+         rb.velocity = Vector2.zero;
+         rb.isKinematic = true;
+     }
 }
