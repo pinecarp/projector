@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using Random = System.Random;
 
@@ -10,14 +11,15 @@ public class ThroughOut : MonoBehaviour
     private float transformTime;
 
     private bool isThrough;
-    
 
+    private string name;
     
-    public GameObject itemPrefab;
-    private GameObject newPrefab;
+    private GameObject itemObject;
+    private GameObject newItem;
     private GameObject player;
 
     private Variables variables;
+    private Item item;
     
     private Random random = new Random();
 
@@ -34,7 +36,7 @@ public class ThroughOut : MonoBehaviour
         Through();
         if (isThrough)
         {
-            newPrefab.transform.position = player.transform.position;
+            newItem.transform.position = player.transform.position;
             isThrough = false;
         }
     }
@@ -48,8 +50,20 @@ public class ThroughOut : MonoBehaviour
             variables.inHand = false;
             isThrough = true;
 
-            Destroy(GameObject.FindGameObjectWithTag("InHand"));
-            newPrefab = Instantiate(itemPrefab, GameObject.FindGameObjectWithTag("Player").transform.position, Quaternion.identity);
+            itemObject = GameObject.FindGameObjectWithTag("InHand");
+            item = itemObject.GetComponent<Item>();
+
+            name = itemObject.gameObject.name;
+            
+            Destroy(itemObject);
+
+            item.itemCanMove = false;
+            itemObject.gameObject.tag = "Item";
+            item.enabled = true;
+            itemObject.GetComponent<Collider2D>().enabled = true;
+            
+            newItem = Instantiate(itemObject, GameObject.FindGameObjectWithTag("Player").transform.position, Quaternion.identity);
+            newItem.gameObject.name = name;
         }
     }
 }

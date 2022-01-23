@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
@@ -35,6 +36,13 @@ public class Item : MonoBehaviour
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         variables = GameObject.FindGameObjectWithTag("GameController").GetComponent<Variables>();
+    }
+
+    private void Start()
+    {
+        pickupItemCanvas.GetComponent<Canvas>().enabled = true;
+        pickupItemCanvas.GetComponent<CanvasScaler>().enabled = true;
+        pickupItemCanvas.GetComponent<GraphicRaycaster>().enabled = true;
     }
 
     private void Update()
